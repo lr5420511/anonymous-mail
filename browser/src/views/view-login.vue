@@ -1,24 +1,30 @@
 <template>
-    <lay-double leftWidth="70%">
+    <lay-double leftWidth="34rem">
         <ser-scenes slot="left"
                     :sceneHeight="leftHeight"
                     :scenes="$store.getters.settingsScenes"
         ></ser-scenes>
-        
+        <ser-login :pwdRegular="regular"
+                   @go="accountAuthorize"
+        ></ser-login>
     </lay-double>
 </template>
 
 <script>
 import LayoutDouble from '../components/layouts/layout-double.vue';
 import ServiceScenes from '../components/services/service-scenes.vue';
+import ServiceLogin from '../components/services/service-login.vue';
+import { PASSWORD_REGULAR } from '../config';
 
 export default {
     components: {
         'lay-double': LayoutDouble,
-        'ser-scenes': ServiceScenes
+        'ser-scenes': ServiceScenes,
+        'ser-login': ServiceLogin
     },
     data: () => ({
-        leftHeight: 0
+        leftHeight: 0,
+        regular: PASSWORD_REGULAR
     }),
     created: async function() {
         const store = this.$store;
@@ -42,7 +48,21 @@ export default {
         this.leftHeight = document.documentElement.scrollHeight;
     },
     methods: {
-    
+        accountAuthorize: async function(account, component) {
+            account = await new Promise(res => setTimeout(() => {
+                const valid = account.username === 'u826' && account.password === 'LR$5420511';
+                res(valid ? {} : null);
+            }, 4000));
+            component.locked = false;
+            if(account) {
+                this.$router.push('/index');
+                return;
+            }
+            this.$message({
+                type: 'error',
+                message: '当前账户信息校验失败，请检查！'
+            });
+        }
     }
 };
 </script>

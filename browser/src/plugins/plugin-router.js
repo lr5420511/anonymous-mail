@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import ViewLogin from '../views/view-login.vue';
+import ViewIndex from '../views/view-index.vue';
 // Import more views to here!
 
 Vue.use(VueRouter);
@@ -16,6 +17,13 @@ export default new VueRouter({
         {
             path: '/login',
             component: ViewLogin
+        },
+        {
+            path: '/index',
+            component: ViewIndex,
+            children: [
+                
+            ]
         }
     ]
 });

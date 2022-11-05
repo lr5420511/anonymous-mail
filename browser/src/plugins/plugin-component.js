@@ -13,7 +13,10 @@ import {
     Input,
     Button,
     ButtonGroup,
-    Message
+    Message,
+    Header,
+    Footer,
+    Loading
     // Import more components to here!
 } from 'element-ui';
 
@@ -34,6 +37,9 @@ Object.assign(Vue.prototype, {
     FormItem,
     Input,
     Button,
-    ButtonGroup
+    ButtonGroup,
+    Header,
+    Footer,
+    Loading
     // Regist more view components to here!
 ].reduce((rt, component) => rt.use(component), Vue);
